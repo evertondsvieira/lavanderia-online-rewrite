@@ -24,7 +24,7 @@ public interface EmployeeMapper {
   Employee toEntity(EmployeeCreateRequest request);
 
   @Mapping(target = "email", source = "user.email")
-  @Mapping(target = "active", source = "user.active")
+  @Mapping(target = "deletedAt", source = "user.deletedAt")
   EmployeeResponse toResponse(Employee employee);
 
   @Mapping(target = "id", ignore = true)

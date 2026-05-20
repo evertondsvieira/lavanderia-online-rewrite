@@ -1,6 +1,7 @@
 package com.lavanderiaonline.modules.item.presentation.dto;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 public record ItemResponse(
   Long id,
@@ -9,6 +10,6 @@ public record ItemResponse(
   BigDecimal unitPrice,
   Integer deadlineDays,
   String imageUrl,
-  boolean active
+  LocalDateTime deletedAt
 ) {
 }

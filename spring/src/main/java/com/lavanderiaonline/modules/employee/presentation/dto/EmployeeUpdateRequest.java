@@ -20,9 +20,6 @@ public record EmployeeUpdateRequest(
 
   @NotNull
   @Past
-  LocalDate birthDate,
-
-  @NotNull
-  Boolean active
+  LocalDate birthDate
 ) {
 }

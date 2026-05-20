@@ -1,6 +1,7 @@
 package com.lavanderiaonline.modules.item.domain;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import org.hibernate.validator.constraints.URL;
 
@@ -56,6 +57,6 @@ public class Item {
   @Column(name = "image_url", length = 255)
   private String imageUrl;
 
-  @Column(name = "active", nullable = false)
-  private boolean active = true;
+  @Column(name = "deleted_at")
+  private LocalDateTime deletedAt;
 }

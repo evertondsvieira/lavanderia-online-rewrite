@@ -30,9 +30,6 @@ public record ItemUpdateRequest(
 
   @Size(max = 255)
   @URL
-  String imageUrl,
-
-  @NotNull
-  Boolean active
+  String imageUrl
 ) {
 }

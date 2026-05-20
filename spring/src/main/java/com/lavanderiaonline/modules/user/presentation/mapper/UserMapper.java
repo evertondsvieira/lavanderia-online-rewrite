@@ -18,6 +18,5 @@ public interface UserMapper {
 
   @BeanMapping(ignoreByDefault = true)
   @Mapping(target = "email", source = "email")
-  @Mapping(target = "active", source = "active")
   void updateFromEmployee(EmployeeUpdateRequest request, @MappingTarget User user);
 }
