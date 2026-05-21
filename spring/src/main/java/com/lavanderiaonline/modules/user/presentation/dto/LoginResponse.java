@@ -7,6 +7,8 @@ public record LoginResponse(
   String email,
   UserProfile profile,
   Long profileId,
-  String name
+  String name,
+  String token,
+  String tokenType
 ) {
 }
