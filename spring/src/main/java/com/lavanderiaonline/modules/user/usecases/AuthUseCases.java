@@ -52,7 +52,7 @@ public class AuthUseCases {
 
   private ProfileData getProfileData(User user) {
     if (user.getProfile() == UserProfile.CUSTOMER) {
-      Customer customer = customerRepository.findByUserIdAndDeletedAtIsNull(user.getId())
+      Customer customer = customerRepository.findByUserId(user.getId())
         .orElseThrow(() -> new BadCredentialsException("Invalid user profile."));
       return new ProfileData(customer.getId(), customer.getName());
     }

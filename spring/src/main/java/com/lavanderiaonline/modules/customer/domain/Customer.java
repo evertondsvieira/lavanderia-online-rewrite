@@ -3,6 +3,7 @@ package com.lavanderiaonline.modules.customer.domain;
 import com.lavanderiaonline.modules.address.domain.Address;
 import com.lavanderiaonline.modules.user.domain.User;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -54,7 +55,7 @@ public class Customer {
   private User user;
 
   @NotNull
-  @OneToOne(fetch = FetchType.LAZY, optional = false)
+  @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
   @JoinColumn(name = "address_id", nullable = false, unique = true)
   private Address address;
 }
