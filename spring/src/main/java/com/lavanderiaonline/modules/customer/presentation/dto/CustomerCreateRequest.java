@@ -25,10 +25,6 @@ public record CustomerCreateRequest(
   String email,
 
   @NotBlank
-  @Size(min = 4, max = 60)
-  String password,
-
-  @NotBlank
   @Size(min = 10, max = 11)
   @Pattern(regexp = "\\d{10,11}")
   String phone,

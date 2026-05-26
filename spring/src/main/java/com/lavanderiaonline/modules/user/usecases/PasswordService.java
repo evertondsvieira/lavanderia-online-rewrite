@@ -20,6 +20,10 @@ public class PasswordService {
     return HexFormat.of().formatHex(salt);
   }
 
+  public String generateNumericPassword() {
+    return String.format("%04d", RANDOM.nextInt(10_000));
+  }
+
   public String hash(String password, String salt) {
     try {
       MessageDigest digest = MessageDigest.getInstance(ALGORITHM);
