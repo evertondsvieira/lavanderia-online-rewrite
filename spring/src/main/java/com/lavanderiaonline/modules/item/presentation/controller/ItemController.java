@@ -3,6 +3,7 @@ package com.lavanderiaonline.modules.item.presentation.controller;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +31,7 @@ public class ItemController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
+  @PreAuthorize("hasRole('EMPLOYEE')")
   public ItemResponse create(@Valid @RequestBody ItemCreateRequest request) {
     return useCases.create(request);
   }
@@ -45,6 +47,7 @@ public class ItemController {
   }
 
   @PutMapping("/{id}")
+  @PreAuthorize("hasRole('EMPLOYEE')")
   public ItemResponse update(
     @PathVariable Long id,
     @Valid @RequestBody ItemUpdateRequest request
@@ -54,6 +57,7 @@ public class ItemController {
 
   @DeleteMapping("/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
+  @PreAuthorize("hasRole('EMPLOYEE')")
   public void remove(@PathVariable Long id) {
     useCases.remove(id);
   }
