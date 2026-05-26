@@ -88,7 +88,7 @@ public class CustomerUseCases {
     return mapper.toResponse(updatedCustomer);
   }
 
-  private Customer findByUserIdOrThrow(Long userId) {
+  public Customer findByUserIdOrThrow(Long userId) {
     return customerRepository.findByUserId(userId)
       .orElseThrow(() -> new ResourceNotFoundException("Customer not found."));
   }
