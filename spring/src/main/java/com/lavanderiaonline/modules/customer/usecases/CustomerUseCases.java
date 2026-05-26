@@ -56,7 +56,7 @@ public class CustomerUseCases {
   }
 
   public CustomerResponse findMine(Long userId) {
-    Customer customer = findMineOrThrow(userId);
+    Customer customer = findByUserIdOrThrow(userId);
 
     return mapper.toResponse(customer);
   }
@@ -68,7 +68,7 @@ public class CustomerUseCases {
 
   @UseCaseTx
   public CustomerResponse updateMine(Long userId, CustomerUpdateRequest request) {
-    Customer customer = findMineOrThrow(userId);
+    Customer customer = findByUserIdOrThrow(userId);
 
     if (customerRepository.existsByCpfAndIdNot(request.cpf(), customer.getId())) {
       throw new ResourceAlreadyExistsException("There is already a customer with that CPF.");
@@ -88,7 +88,7 @@ public class CustomerUseCases {
     return mapper.toResponse(updatedCustomer);
   }
 
-  private Customer findMineOrThrow(Long userId) {
+  private Customer findByUserIdOrThrow(Long userId) {
     return customerRepository.findByUserId(userId)
       .orElseThrow(() -> new ResourceNotFoundException("Customer not found."));
   }
