@@ -46,6 +46,8 @@ public interface OrderMapper {
   @Mapping(target = "customerName", source = "customer.name")
   OrderSummaryResponse toSummaryResponse(Order order);
 
+  List<OrderSummaryResponse> toSummaryResponseList(List<Order> orders);
+
   OrderQuoteResponse toQuoteResponse(
       BigDecimal totalPrice,
       Integer deadlineDays,
