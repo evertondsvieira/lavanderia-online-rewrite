@@ -1,6 +1,8 @@
 package com.lavanderiaonline.modules.customer.presentation.controller;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -8,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
 import com.lavanderiaonline.infrastructure.security.AuthenticatedUser;
 import com.lavanderiaonline.modules.customer.presentation.dto.CustomerCreateRequest;
@@ -33,11 +34,13 @@ public class CustomerController {
   }
 
   @GetMapping("/me")
+  @PreAuthorize("hasRole('CUSTOMER')")
   public CustomerResponse findMine(@AuthenticationPrincipal AuthenticatedUser authenticatedUser) {
     return useCases.findMine(authenticatedUser.id());
   }
 
   @PutMapping("/me")
+  @PreAuthorize("hasRole('CUSTOMER')")
   public CustomerResponse update(
     @AuthenticationPrincipal AuthenticatedUser authenticatedUser,
     @Valid @RequestBody CustomerUpdateRequest request

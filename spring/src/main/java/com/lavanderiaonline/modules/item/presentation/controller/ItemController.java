@@ -37,11 +37,13 @@ public class ItemController {
   }
 
   @GetMapping("/{id}")
+  @PreAuthorize("hasRole('CUSTOMER') or hasRole('EMPLOYEE')")
   public ItemResponse findById(@PathVariable Long id) {
     return useCases.findById(id);
   }
 
   @GetMapping
+  @PreAuthorize("hasRole('CUSTOMER') or hasRole('EMPLOYEE')")
   public List<ItemResponse> findAll() {
     return useCases.findAll();
   }
