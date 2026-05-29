@@ -2,10 +2,12 @@ package com.lavanderiaonline.modules.customer.usecases;
 
 import java.util.List;
 
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import com.lavanderiaonline.infrastructure.config.ReadTx;
 import com.lavanderiaonline.infrastructure.config.UseCaseTx;
+import com.lavanderiaonline.infrastructure.email.CustomerPasswordCreatedEvent;
 import com.lavanderiaonline.infrastructure.exception.ResourceAlreadyExistsException;
 import com.lavanderiaonline.infrastructure.exception.ResourceNotFoundException;
 import com.lavanderiaonline.modules.address.presentation.mapper.AddressMapper;
@@ -34,6 +36,7 @@ public class CustomerUseCases {
   private final PasswordService passwordService;
   private final CustomerMapper mapper;
   private final AddressMapper addressMapper;
+  private final ApplicationEventPublisher eventPublisher;
 
   @UseCaseTx
   public CustomerResponse create(CustomerCreateRequest request) {
@@ -51,6 +54,7 @@ public class CustomerUseCases {
     customer.setUser(user);
 
     Customer savedCustomer = customerRepository.save(customer);
+    eventPublisher.publishEvent(new CustomerPasswordCreatedEvent(request.email(), password));
 
     return mapper.toResponse(savedCustomer);
   }
