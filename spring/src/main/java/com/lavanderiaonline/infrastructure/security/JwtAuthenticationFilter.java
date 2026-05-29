@@ -43,7 +43,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String token = authorization.substring(BEARER_PREFIX.length());
         Long userId = tokenService.getUserId(token);
 
-        userRepository.findByIdAndDeletedAtIsNull(userId).ifPresent(this::authenticate);
+        User user = userRepository.findByIdAndDeletedAtIsNull(userId)
+          .orElseThrow(() -> new IllegalArgumentException("Authenticated user was not found."));
+
+        authenticate(user);
       } catch (JwtException | IllegalArgumentException exception) {
         response.sendError(HttpStatus.UNAUTHORIZED.value(), "Invalid authentication token.");
         return;
