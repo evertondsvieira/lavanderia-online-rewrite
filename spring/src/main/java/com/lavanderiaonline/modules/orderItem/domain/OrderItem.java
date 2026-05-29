@@ -26,7 +26,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
+@Entity(name = "LaundryOrderItem")
 @Table(
   name = "laundry_order_items",
   indexes = {
